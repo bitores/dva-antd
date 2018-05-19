@@ -2,9 +2,20 @@ import React, {Component} from 'react';
 import { connect } from 'dva';
 import { Table} from 'antd';
 
-@connect(({example})=>({
-	example
-}))        
+@connect(()=>{
+	return {
+    data:[
+      {
+        id: 1,
+        value: 56464
+      },
+      {
+        id: 4,
+        value: 56464
+      },
+    ]
+  }
+})        
 export default class IndexPage extends Component {
 
 	render(){
@@ -20,7 +31,7 @@ export default class IndexPage extends Component {
 		  ];
 		console.log(this.props);
 
-		const {example:{data}} = this.props;
+		const {data} = this.props;
 		return (
 			<Table
 		      dataSource={data}

@@ -4,14 +4,21 @@ export default {
   namespace: 'example',
 
   state: {
-    data:{
-      a: 1
-    }
+    data:[
+      {
+        id: 1,
+        value: 56464
+      },
+      {
+        id: 5,
+        value: 56464
+      },
+    ]
   },
 
   subscriptions: {
-    setup({ dispatch, history }) {  // eslint-disable-line
-    },
+    // setup({ dispatch, history }) {  // eslint-disable-line
+    // },
   },
 
   effects: {

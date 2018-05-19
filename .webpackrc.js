@@ -4,7 +4,6 @@ export default {
   entry: 'client/index.js',
   extraBabelPlugins: [
   	['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
-    "transform-decorators-legacy"
   ],
   env: {
     development: {
@@ -15,7 +14,9 @@ export default {
     components: path.resolve(__dirname, 'client/components/'),
   },
   ignoreMomentLocale: true,
-  // theme: './client/theme.js',
+  theme: {
+    "@primary-color": "#1DA57A"
+  },
   html: {
     template: './client/index.ejs',
   },
