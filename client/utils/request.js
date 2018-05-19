@@ -1,8 +1,7 @@
 import fetch from 'dva/fetch';
+import { notification } from 'antd';
 
-function parseJSON(response) {
-  return response.json();
-}
+
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -74,25 +73,6 @@ export default function request(url, options) {
       return response.json();
     })
     .catch(e => {
-      const { dispatch } = store;
-      const status = e.name;
-      if (status === 401) {
-        location.reload();
-        // dispatch({
-        //   type: 'login/logout',
-        // });
-        return;
-      }
-      if (status === 403) {
-        dispatch(routerRedux.push('/exception/403'));
-        return;
-      }
-      if (status <= 504 && status >= 500) {
-        dispatch(routerRedux.push('/exception/500'));
-        return;
-      }
-      if (status >= 404 && status < 422) {
-        dispatch(routerRedux.push('/exception/404'));
-      }
+      console.log(e)
     });
 }

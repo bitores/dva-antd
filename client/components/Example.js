@@ -2,9 +2,7 @@ import React from 'react';
 
 const Example = () => {
   return (
-    <div>
-      Example
-    </div>
+    <h1><center>Example 公共组件 头部</center></h1>
   );
 };
 

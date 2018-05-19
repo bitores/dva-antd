@@ -1,3 +1,4 @@
+import example from "./mock/example";
 
 export default {
 	// 支持值为 Object 和 Array
@@ -16,4 +17,6 @@ export default {
   // 请求 /someDir/0.0.50/index.css 会被代理到 https://alicdn.com/taobao, 
   // 实际返回 https://alicdn.com/taobao/0.0.50/index.css
   'GET /someDir/(.*)': 'https://alicdn.com//taobao',
+
+  ...example,
 };

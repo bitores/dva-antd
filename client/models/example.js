@@ -1,3 +1,5 @@
+import {query,person} from '../services/example';
+
 
 export default {
 
@@ -25,6 +27,18 @@ export default {
     *fetch({ payload }, { call, put }) {  // eslint-disable-line
       yield put({ type: 'save' });
     },
+
+    *fetchUser({payload}, {call}) {
+       const res = yield call(query, payload);
+       console.log(res);
+    },
+
+    *fetchXiaoming({payload}, {call}) {
+       const res = yield call(person, payload);
+       console.log(res);
+    }
+
+    
   },
 
   reducers: {

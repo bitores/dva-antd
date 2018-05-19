@@ -1,11 +1,28 @@
 import React, {Component} from 'react';
 import { connect } from 'dva';
 import { Table} from 'antd';
+import Example from '../components/Example';
 
 @connect(({example})=>({
-	example
+	example,
+	myData: example.data,
 }))        
 export default class IndexPage extends Component {
+
+	componentDidMount(){
+		const {dispatch} = this.props;
+
+		dispatch({
+			type: 'example/fetchUser',
+			payload:null
+		});
+
+		dispatch({
+			type: 'example/fetchXiaoming',
+			payload:null
+		});
+	}
+
 
 	render(){
 		const columns = [
@@ -22,11 +39,14 @@ export default class IndexPage extends Component {
 
 		const {example:{data}} = this.props;
 		return (
-			<Table
-		      dataSource={data}
-		      columns={columns}
-		      rowKey="id"
-		    ></Table>
+			<div>
+				<Example></Example>
+				<Table
+			      dataSource={data}
+			      columns={columns}
+			      rowKey="id"
+			    ></Table>
+		    </div>
 		)
 	}
 }
