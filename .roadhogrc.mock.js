@@ -1,4 +1,11 @@
 import example from "./mock/example";
+import * as demo from './mock/demo';
+
+// console.log(demo)
+
+Object.keys(demo).find((key,val)=>{
+  console.log(key,val, demo[key])
+})
 
 export default {
 	// 支持值为 Object 和 Array
