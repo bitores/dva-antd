@@ -24,7 +24,7 @@ function lintOne (aims) {
 }
 
 gulp.task('ESlint', () => {
-  return gulp.src(['src/**/*.js', '!node_modules/**'])
+  return gulp.src(['server/**/*.js', '!node_modules/**'])
     .pipe(eslint({configFile: './.eslintrc.js'}))
     .pipe(eslint.format(friendlyFormatter))
     // .pipe(eslint.failAfterError())
@@ -47,7 +47,7 @@ gulp.task('ESlint_nodemon', ['ESlint'], function () {
       return []
     },
     verbose: true,
-    ignore: ['build/*.js', 'dist/*.js', 'nodemon.json', '.git', 'node_modules/**/node_modules', 'gulpfile.js'],
+    ignore: ['client','build/*.js', 'dist/*.js', 'nodemon.json', '.git', 'node_modules/**/node_modules', 'gulpfile.js'],
     env: {
       NODE_ENV: 'development'
     },
@@ -71,7 +71,7 @@ gulp.task('nodemon', function () {
       js: jsScript
     },
     verbose: true,
-    ignore: ['build/*.js', 'dist/*.js', 'nodemon.json', '.git', 'node_modules/**/node_modules', 'gulpfile.js'],
+    ignore: ['client','build/*.js', 'dist/*.js', 'nodemon.json', '.git', 'node_modules/**/node_modules', 'gulpfile.js'],
     env: {
       NODE_ENV: 'development'
     },

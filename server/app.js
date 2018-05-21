@@ -1,34 +1,44 @@
 import Koa2 from 'koa'
 import KoaBody from 'koa-body'
 import KoaStatic from 'koa-static2'
-import {
-  System as SystemConfig
-} from './config'
+import {System as SystemConfig} from './config'
 import path from 'path'
-import MainRoutes from './routes/main-routes'
+import MainRoutes from './routes'
 import ErrorRoutesCatch from './middleware/ErrorRoutesCatch'
-import ErrorRoutes from './routes/error-routes'
+import ErrorRoute from './routes/error-route'
 import jwt from 'koa-jwt'
 import fs from 'fs'
 // import PluginLoader from './lib/PluginLoader'
+// 设置数据库链接
+import './lib/sequelize'
+import logger from 'koa-logger'
+import ResponseData from './middleware/ResponseData'
+import UserAuth from './middleware/UserAuth'
+import CorsRequest from './middleware/CorsRequest'
 
 const app = new Koa2()
 const env = process.env.NODE_ENV || 'development' // Current mode
 
 const publicKey = fs.readFileSync(path.join(__dirname, '../publicKey.pub'))
 
-app
-  .use((ctx, next) => {
-    if (ctx.request.header.host.split(':')[0] === 'localhost' || ctx.request.header.host.split(':')[0] === '127.0.0.1') {
-      ctx.set('Access-Control-Allow-Origin', '*')
-    } else {
-      ctx.set('Access-Control-Allow-Origin', SystemConfig.HTTP_server_host)
-    }
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-    ctx.set('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS')
-    ctx.set('Access-Control-Allow-Credentials', true) // 允许带上 cookie
-    return next()
+if (env === 'development') { // logger
+  /*
+  app.use((ctx, next) => {
+    const start = new Date()
+    return next().then(() => {
+      const ms = new Date() - start
+      console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+    })
   })
+  */
+  // 改用koa-logger组件，注释上面代码
+  app.use(logger())
+  // 开发环境用跨域请求，生产环境用反向代理服务器
+  app.use(CorsRequest)
+}
+
+app
+  .use(ResponseData)
   .use(ErrorRoutesCatch())
   .use(KoaStatic('assets', path.resolve(__dirname, '../assets'))) // Static resource
   .use(jwt({ secret: publicKey }).unless({ path: [/^\/public|\/user\/login|\/assets/] }))
@@ -43,19 +53,10 @@ app
     textLimit: '10mb'
   })) // Processing request
   // .use(PluginLoader(SystemConfig.System_plugin_path))
+  .use(UserAuth)
   .use(MainRoutes.routes())
   .use(MainRoutes.allowedMethods())
-  .use(ErrorRoutes())
-
-if (env === 'development') { // logger
-  app.use((ctx, next) => {
-    const start = new Date()
-    return next().then(() => {
-      const ms = new Date() - start
-      console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-    })
-  })
-}
+  .use(ErrorRoute())
 
 app.listen(SystemConfig.API_server_port)
 
