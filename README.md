@@ -126,3 +126,54 @@ bable-runtime 之后，
 2、
 ```
 
+
+
+#### ES6
+
+```
+# node runtime support es6
+
+1、es-check
+	es-check -g 
+2、babel
+	babel-cli -g --save-dev 
+	babel-preset-es2015 --save-dev
+3、.babelrc 
+	{
+        "presets":[
+            "es2015"  ------babel-preset-es2015,
+            "stage-2" ------babel-preset-stage-2
+        ],
+        "plugins":[]
+	}
+	
+4、transform
+	babel src -d dist
+	
+-----------
+执行代码时：
+	> babel-node demo.js
+但是：
+	> node demo.js 报错
+
+======== 实现 node demo.js 成功
+1、babel-register --save
+2、app.js
+	var fs = require('fs');  
+    var babelConfig = JSON.parse(fs.readFileSync('./.babelrc'));  
+    require('babel-register')(babelConfig);  
+    require('./demo.js'); 
+3、> node app.js
+
+
+======= hmr 开发热
+```
+
+#### server 端开发，代码实时监控（服务器的热启动）
+
+```
+# 热启动
+nodemon/forever/pm2....
+开发时 nodemon
+```
+

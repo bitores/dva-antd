@@ -8,6 +8,7 @@ export default {
   env: {
     development: {
       extraBabelPlugins: ['dva-hmr'],
+      "transform-decorators-legacy"
     },
   },
   alias: {
@@ -23,4 +24,13 @@ export default {
   disableDynamicImport: true,
   publicPath: '/',
   hash: true,
+  proxy: {
+    "/proxyApi": {
+      "target": "http://192.168.11.16:8000",
+      "changeOrigin": true,
+      "pathRewrite":{
+        "^/proxyApi": ""
+      }
+    }
+  }
 };
