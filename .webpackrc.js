@@ -7,8 +7,7 @@ export default {
   ],
   env: {
     development: {
-      extraBabelPlugins: ['dva-hmr'],
-      "transform-decorators-legacy"
+      extraBabelPlugins: ['dva-hmr']
     },
   },
   alias: {
