@@ -1,7 +1,8 @@
 const path = require('path');
 
 export default {
-  entry: 'client/index.js',
+  // entry: 'client/pages/*.js',
+  // outputPath: "[chunkhash].bundle.js",
   extraBabelPlugins: [
   	['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
   ],
@@ -23,13 +24,13 @@ export default {
   disableDynamicImport: true,
   publicPath: '/',
   hash: true,
-  proxy: {
-    "/proxyApi": {
-      "target": "http://192.168.11.16:8000",
-      "changeOrigin": true,
-      "pathRewrite":{
-        "^/proxyApi": ""
-      }
-    }
-  }
+  // proxy: {
+  //   "/proxyApi": {
+  //     "target": "http://192.168.11.16:8000",
+  //     "changeOrigin": true,
+  //     "pathRewrite":{
+  //       // "^/proxyApi": ""
+  //     }
+  //   }
+  // }
 };
