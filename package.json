@@ -10,7 +10,8 @@
     "antd": "^3.5.2",
     "dva": "^2.2.3",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "roadhog-api-doc": "^1.0.3"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.3",

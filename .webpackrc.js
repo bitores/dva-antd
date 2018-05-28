@@ -1,7 +1,7 @@
 const path = require('path');
 
 export default {
-  // entry: 'client/pages/*.js',
+  entry: 'client/pages/*.js',
   // outputPath: "[chunkhash].bundle.js",
   extraBabelPlugins: [
   	['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }],
