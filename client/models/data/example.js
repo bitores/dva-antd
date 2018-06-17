@@ -1,4 +1,9 @@
-import {query,person} from '../services/example';
+import {
+  users,
+  person,
+  // 以下为通用方法
+
+} from '../../service';
 
 
 export default {
@@ -24,12 +29,8 @@ export default {
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {  // eslint-disable-line
-      yield put({ type: 'save' });
-    },
-
     *fetchUser({payload}, {call}) {
-       const res = yield call(query, payload);
+       const res = yield call(users, payload);
        console.log(res);
     },
 

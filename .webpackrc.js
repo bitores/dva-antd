@@ -8,7 +8,10 @@ export default {
   env: {
     development: {
       extraBabelPlugins: ['dva-hmr']
-    },
+    }
+  },
+  define:{
+    "process.env.TTT": process.env.TTT
   },
   alias: {
     components: path.resolve(__dirname, 'client/components/'),

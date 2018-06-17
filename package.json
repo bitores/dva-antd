@@ -1,13 +1,14 @@
 {
   "private": true,
   "scripts": {
-    "start": "set PORT=8002&&roadhog dev",
+    "start": "cross-env PROXY=false TTT=true PORT=8002 roadhog dev",
     "build": "roadhog build",
     "lint": "eslint --ext .js src test",
     "precommit": "npm run lint"
   },
   "dependencies": {
     "antd": "^3.5.2",
+    "cross-env": "^5.2.0",
     "dva": "^2.2.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
@@ -24,7 +25,10 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "husky": "^0.14.3",
+    "mockjs": "^1.0.1-beta3",
     "redbox-react": "^1.4.3",
-    "roadhog": "^2.4.1"
+    "require-all": "^2.2.0",
+    "roadhog": "^2.4.1",
+    "roadhog-api-doc": "^1.0.4"
   }
 }

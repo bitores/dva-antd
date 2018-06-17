@@ -3,9 +3,10 @@ import { connect } from 'dva';
 import { Table} from 'antd';
 import Example from '../components/Example';
 
-@connect(({example})=>({
+@connect(({example, common})=>({
+	common,
 	example,
-	myData: example.data,
+	// myData: example.data,
 }))        
 export default class IndexPage extends Component {
 
@@ -21,6 +22,28 @@ export default class IndexPage extends Component {
 			type: 'example/fetchXiaoming',
 			payload:null
 		});
+
+		dispatch({
+			type:'common/get',
+			payload:{
+				url:'/users/users',
+				params: {}
+			},
+			data:'xx',
+			callback:(data)=>{
+				console.log(data)
+			}
+		})
+
+		dispatch({
+			type:'common/get',
+			payload:{
+				url:'/mockData',
+			},
+			callback:(data)=>{
+				console.log('mock data:', data)
+			}
+		})
 	}
 
 

@@ -1,5 +1,6 @@
 import dva from 'dva';
 import './index.css';
+import models from './models';
 
 // 1. Initialize
 const app = dva();
@@ -8,7 +9,9 @@ const app = dva();
 // app.use({});
 
 // 3. Model
-app.model(require('./models/example').default);
+// app.model(require('./models').default);
+console.log(models)
+models.forEach(m=>app.model(m))
 
 // 4. Router
 app.router(require('./router').default);
