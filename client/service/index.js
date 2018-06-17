@@ -52,7 +52,7 @@ export async function deleteData({url, params}) {
 }
 
 
-// 风格三 普通 service
+// 风格三 普通 service, 也算是 公共的 api 请求，如果是个例可以写在 文件中
 export async function users() {
   return request(`${apiPrefix}/users`);
 }

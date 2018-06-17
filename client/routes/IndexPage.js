@@ -26,7 +26,7 @@ export default class IndexPage extends Component {
 		dispatch({
 			type:'common/get',
 			payload:{
-				url:'/users/users',
+				url:'/users/xiaoming',
 				params: {}
 			},
 			data:'xx',

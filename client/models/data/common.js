@@ -1,5 +1,5 @@
+import { routerRedux } from 'dva/router';
 //  通用模块
-
 import {
   // 以下为通用方法
   getData,
@@ -16,13 +16,17 @@ export default {
   },
 
   subscriptions: {
-    // setup({ dispatch, history }) {  // eslint-disable-line
-    // },
+    setup({ dispatch, history }) {  // eslint-disable-line
+      console.log("路由变化:",history)
+    },
   },
 
   effects: {
-    *get({ payload, data, callback }, { call, put }) {  // eslint-disable-line
-      console.log(payload)
+    *get({ payload, data, callback }, { call, put, select }) {  // eslint-disable-line
+      // console.log(payload)
+      yield select(state => {
+        console.log('获取项目全局所有模块 state', state)
+      })
       const res = yield call(getData, payload);
       if(res.code === 0) {
         yield put({
@@ -53,6 +57,20 @@ export default {
         type:'save',
         payload,
       })
+    },
+
+    // eg.
+    // dispatch({
+    //   type:'common/push',
+    //   payload:{
+    //     url:'/usrs',
+    //     params:{
+    //     }
+    //   }
+    // })
+    *push({ payload }, { put }) {
+
+      yield put(routerRedux.push(payload));
     }
     
   },
