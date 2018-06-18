@@ -1,14 +1,28 @@
 import React, {Component} from 'react';
 import { connect } from 'dva';
 import { Table} from 'antd';
-import Example from '../components/Example';
+import Example from 'components/Example';
 
 @connect(({example, common})=>({
 	common,
 	example,
-	// myData: example.data,
+	columns: [
+	    {
+	      title: 'ID',
+	      dataIndex: 'id'
+	    },
+	    {
+	      title: '值',
+	      dataIndex: 'value'
+	    }
+	 ]
 }))        
 export default class IndexPage extends Component {
+
+	state={
+		dd:1,
+		ff:2
+	};
 
 	componentDidMount(){
 		const {dispatch} = this.props;
@@ -44,21 +58,27 @@ export default class IndexPage extends Component {
 				console.log('mock data:', data)
 			}
 		})
+
+		dispatch({
+			type:'common/get',
+			payload:{
+				url:'/users/1',
+				params:{
+					pageSize:10,
+					currentPage: 1,
+				}
+			},
+			callback:(data)=>{
+				console.log('users data:', data)
+			}
+		})
 	}
 
 
 	render(){
-		const columns = [
-		    {
-		      title: 'ID',
-		      dataIndex: 'id'
-		    },
-		    {
-		      title: '值',
-		      dataIndex: 'value'
-		    }
-		  ];
-		console.log(this.props);
+		const {columns} = this.props;
+		const {dd} = this.state;
+		console.log(this.state.dd, this.state.ff)
 
 		const {example:{data}} = this.props;
 		return (
@@ -73,3 +93,19 @@ export default class IndexPage extends Component {
 		)
 	}
 }
+
+// connect 作为函数 另一种用法
+// export default connect(()=>{
+//   return {
+//     data:[
+//       {
+//         id: 1,
+//         value: 56464
+//       },
+//       {
+//         id: 3,
+//         value: 56464
+//       },
+//     ]
+//   }
+// })(IndexPage);

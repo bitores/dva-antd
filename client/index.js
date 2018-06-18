@@ -1,23 +1,23 @@
 import dva from 'dva';
 import createLoading from 'dva-loading';
-import './index.css';
+import { message } from 'antd';
 import models from './models';
+import './index.css';
 
 // 1. Initialize
 const app = dva({
-	// onStateChange:()=>{
+	// onStateChange(){
 
 	// },
-	// onReducer:()=>{
+	// onReducer(){
 
 	// },
-	// onEffect:()=>{
+	// onEffect(){
 
 	// },
-	// initialState:{
-
-	// 	'auth':"hangzj"
-	// }
+	onError(err) {
+	    message.error(err.message)
+	}
 });
 
 // 2. Plugins

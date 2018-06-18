@@ -65,4 +65,37 @@ export default {
 	    })
     },
 
+    [`GET ${apiPrefix}/users/1`](req, res) {
+	    const params = req.query;
+	    // console.log(params)
+	    res.json({
+	      	$desc: '模拟接受接口请求',
+		    $body: mock({
+		    	'list|5':[
+		    		{
+		    			'id|+1':0,
+		    			'name':'@CNAME',
+		    			'email':'@EMIAL(bitors.com)',
+		    			'phone': /1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}/,
+		    			'avatar':'@IMAGE(125x125)',
+		    			'isadmin|0-1': 1,
+						'created_at': () => {
+							return Random.datetime('yyyy-MM-dd HH:mm:ss');
+						},
+						'updated_at': () => {
+							// 随机 时间戳
+							let tmp = Random.datetime();
+							return new Date(tmp).getTime();
+						},
+		    		}
+		    	],
+		    	pagination:{
+		    		currentPage: params.currentPage,
+		    		pageSize: params.pageSize,
+		    		total: 15
+		    	}
+		    })
+	    })
+	}
+
 }
