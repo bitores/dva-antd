@@ -6,14 +6,13 @@ export default {
   [`GET ${apiPrefix}/users`]: { $body:{ users: [1,4] } },
  
   // GET POST 可省略
-  [`${apiPrefix}/users/xiaoming`]: { id: 1, $body:{id: 2} },
+  [`GET ${apiPrefix}/users/xiaoming`]: { id: 1, $body:{id: 2} },
 
-  [`DELETE ${apiPrefix}/users/xiaoming`]: { id: 1, $body:{id: 2} },
+  [`DELETE ${apiPrefix}/users/xiaoming`]: { id: 1, $body:{id: 3} },
 
   
- 
   // 支持自定义函数，API 参考 express@4
-  [`POST ${apiPrefix}/users/create`]: (req, res) => { res.end('OK'); },
+  [`POST ${apiPrefix}/users/create`] (req, res) { res.json('OK'); },
  
   // Forward 到另一个服务器
   [`GET /assets/*`]: 'https://assets.online/',

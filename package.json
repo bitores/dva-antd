@@ -4,7 +4,8 @@
     "start": "cross-env PROXY=false TTT=true PORT=8002 roadhog dev",
     "build": "roadhog build",
     "lint": "eslint --ext .js src test",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "doc": "cross-env DOC=true roadhog-api-doc start"
   },
   "dependencies": {
     "antd": "^3.5.2",

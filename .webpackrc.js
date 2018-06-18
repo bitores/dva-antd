@@ -11,7 +11,7 @@ export default {
     }
   },
   define:{
-    "process.env.TTT": process.env.TTT
+    "process.env.TTT": process.env.TTT,
   },
   alias: {
     components: path.resolve(__dirname, 'client/components/'),

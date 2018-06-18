@@ -36,3 +36,21 @@ export function getLocalStorage(key) {
   const value = JSON.parse(localStorage.getItem(key));
   return value;
 }
+
+// 深层获取 对象的 键值
+// eg.
+// var obj = {
+//     a: {
+//         a3: {
+//             a31: 1,
+//         }
+//     }
+// };
+// var arr = ['a', 'a3', 'a31'];
+// getValue(arr, obj)
+export function getValue(arr=['o'], obj={}) {
+  if(Object.prototype.toString.call(arr)!=='[object Array]') {
+    throw new Error('First params must be array')
+  }
+  return arr.reduce((o, k)=>o && k in o? o[k]:null,obj)
+}
